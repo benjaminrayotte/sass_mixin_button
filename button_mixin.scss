@@ -1,0 +1,43 @@
+//Author:Benjamin Rancourt Ayotte
+//Date:2013-04-16
+//mixin to create nice css button in sass
+//to create the button you need to put a span in a div in your html page & apply the mixin to the div (with a class for example) and you add the text to appear on the button in the span
+//$color= color of the text in the button
+//$start_color= color to start shading of your button
+//$end_color= color to start shading of your button
+//$border= border of your button
+//$inner= inner border color,not a real inner border but create that effect
+//$pad_lr= space in front & after your text
+//$pad_tb= space on top & bottom of your text
+
+@mixin btn($color:#ffffff,$start_color:#1f1f1f,$end_color:#616161,$border:#000000,$inner:#ffffff,$pad_lr:20px,$pad_tb:3px) {
+    border:1px $border solid;
+		background-color:$inner;
+		padding:$pad_tb+2px 2px;
+		display:inline-block;
+		cursor:pointer;
+		
+		& span{
+			@include bg_generator($start_color,$end_color);
+			padding:$pad_tb $pad_lr;
+			color:$color;
+		}
+		& span:hover{
+			@include bg_generator($end_color,$start_color);
+		}
+
+}
+
+//shading generator
+
+@mixin bg_generator($start_color,$end_color) {
+	background: $start_color; /* Old browsers */
+	background: -moz-linear-gradient(top,  $start_color 0%, $end_color 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$start_color), color-stop(100%,$end_color)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  $start_color 0%,$end_color 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  $start_color 0%,$end_color 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  $start_color 0%,$end_color 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  $start_color 0%,$end_color 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$start_color', endColorstr='$end_color',GradientType=0 ); /* IE6-9 */
+
+}
